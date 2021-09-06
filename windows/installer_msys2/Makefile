@@ -36,7 +36,13 @@ else
 QT6_MOCCMD="$(MOCCMD)"
 endif
 
+ifeq ($(CI),yes)
+ICUVER=68
+LERC=
+else
 ICUVER=69
+LERC=libLerc.dll
+endif
 
 INSTSUB=${ARCHDIR}
 
@@ -322,7 +328,7 @@ SDL2_DLLS := \
 	libzstd.dll \
 	libdeflate.dll \
 	libjbig-0.dll \
-	libLerc.dll
+	${LERC}
 
 install-env-sdl2: install-env-default-fcmp
 	# add DLLs
