@@ -39,9 +39,11 @@ endif
 ifeq ($(CI),yes)
 ICUVER=68
 LERC=
+MD4C=
 else
 ICUVER=69
 LERC=libLerc.dll
+MD4C=libmd4c.dll
 endif
 
 INSTSUB=${ARCHDIR}
@@ -352,7 +354,7 @@ QT5_DLLS := \
 	libbrotlicommon.dll \
 	libdouble-conversion.dll \
 	libzstd.dll \
-	libmd4c.dll
+	${MD4C}
 
 install-env-qt5: install-env-common
 	# add DLLs
@@ -431,7 +433,7 @@ RULEDIT_QT5_DLLS := \
 	libraqm-0.dll \
 	libexpat-1.dll \
 	libfribidi-0.dll \
-	libmd4c.dll
+	${MD4C}
 
 install-env-ruledit-qt5:
 	# add DLLs
