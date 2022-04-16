@@ -37,6 +37,10 @@ ninja install
 ;;
 
 "os_x")
+./macOS/homebrew/macapp.sh
+;;
+
+"old_x")
 # gcc is an alias for clang on OS X
 
 export PATH="/usr/local/opt/gettext/bin:/usr/local/opt/icu4c/bin:$(brew --prefix qt@6)/bin:$PATH"
