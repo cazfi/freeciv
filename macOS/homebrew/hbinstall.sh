@@ -46,6 +46,7 @@ HEAD_PACKAGES="\
 "
 
 PACKAGES="\
+ pkg-config \
  lua@5.4 \
  autoconf \
  automake \
