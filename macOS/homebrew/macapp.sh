@@ -49,6 +49,8 @@ fi
 cd build || exit 1
 
 export PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt6/bin/:$PATH"
+export PKG_CONFIG_PATH="${MAINDIR}/Contents/Resources/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
+export LIBS="-L${MAINDIR}/Contents/Resources/opt/qt6/lib -L${MAINDIR}/Contents/Resources/lib"
 
 if ! test -x "${SRCROOT}/configure" ; then
   # Assume this to be a git checkout - generate required bootstrap files
@@ -62,9 +64,7 @@ fi
 export MOCCMD="$(find "${MAINDIR}/Resources/Cellar/qt" -name "moc" | head -n 1)"
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
- LDFLAGS="-L${MAINDIR}/Contents/Resources/opt/qt6/lib -L${MAINDIR}/Contents/Resources/lib" \
- PKG_CONFIG_PATH="${MAINDIR}/Contents/Resources/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH" \
- --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
+     --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
 then
   echo "Freeciv configure failed!" >&2
   exit 1
