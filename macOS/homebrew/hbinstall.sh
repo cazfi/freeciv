@@ -37,6 +37,14 @@ fi
 
 eval "$("${MAINDIR}/Resources/bin/brew" shellenv)"
 
+# Packages that we temporarily take from HEAD
+# - shared-mime-info : current version available from homebrew does not build with recent meson
+# - meson : version available from homebrew fails building latest gtk+3
+HEAD_PACKAGES="\
+ shared-mime-info \
+ meson \
+"
+
 PACKAGES="\
  lua@5.4 \
  autoconf \
@@ -57,6 +65,13 @@ PACKAGES="\
  sdl2_ttf \
  qt@6 \
 "
+
+if test "$HEAD_PACKAGES" != "" ; then
+  if ! brew install --HEAD $HEAD_PACKAGES ; then
+    echo "Homebrew install of HEAD packages failed" >&2
+    exit 1
+  fi
+fi
 
 if ! brew fetch $PACKAGES ; then
   echo "Homebrew fetching packages failed." >&2
