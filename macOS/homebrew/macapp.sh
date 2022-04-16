@@ -48,6 +48,8 @@ fi
 
 cd build || exit 1
 
+export PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt6/bin/:$PATH"
+
 if ! test -x "${SRCROOT}/configure" ; then
   # Assume this to be a git checkout - generate required bootstrap files
   if ! "${SRCROOT}/autogen.sh" --no-configure-run ; then
@@ -58,8 +60,6 @@ fi
 
 # TODO: Find out where the command really is, and get rid of this search
 export MOCCMD="$(find "${MAINDIR}/Resources/Cellar/qt" -name "moc" | head -n 1)"
-
-export PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt6/bin/:$PATH"
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
  LDFLAGS="-L${MAINDIR}/Contents/Resources/opt/qt6/lib -L${MAINDIR}/Contents/Resources/lib" \
