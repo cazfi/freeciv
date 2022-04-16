@@ -59,8 +59,9 @@ fi
 # TODO: Find out where the command really is, and get rid of this search
 export MOCCMD="$(find "${MAINDIR}/Resources/Cellar/qt" -name "moc" | head -n 1)"
 
+export PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt6/bin/:$PATH"
+
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
- PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt6/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" \
  LDFLAGS="-L${MAINDIR}/Contents/Resources/opt/qt6/lib -L${MAINDIR}/Contents/Resources/lib" \
  PKG_CONFIG_PATH="${MAINDIR}/Contents/Resources/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH" \
  --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
