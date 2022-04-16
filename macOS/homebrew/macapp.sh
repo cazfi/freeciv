@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Build MacOS freeciv .app
+# WIP
+
+# "master" works too, if you want development version
+HBVER="3.4.6"
+
 cd "$(dirname $0)/../../"
 
 if ! test -x "./fc_version" ; then
@@ -26,7 +32,7 @@ if ! mkdir -p "$MAINDIR/MacOS" ; then
   exit 1
 fi
 
-if ! curl -L https://github.com/Homebrew/brew/tarball/master |
+if ! curl -L https://github.com/Homebrew/brew/tarball/$HBVER |
      tar xz --strip 1 -C "$MAINDIR/Resources"
 then
   echo "Homebrew install failed" >&2
@@ -34,8 +40,6 @@ then
 fi
 
 eval "$($MAINDIR/Resources/bin/brew shellenv)"
-command -p brew
-brew update --force --quiet
 
 PACKAGES="\
  lua@5.4 \
@@ -72,10 +76,10 @@ fi
 export PATH="${MAINDIR}/Resources/opt/libtool/libexec/gnubin:$PATH"
 
 if ! ./configure --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
- PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt5/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" \
+ PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt6/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" \
  LDFLAGS="-L${MAINDIR}/Contents/Resources/opt/qt6/lib -L${MAINDIR}/Contents/Resources/lib" \
  PKG_CONFIG_PATH="${MAINDIR}/Contents/Resources/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH" \
- --enable-client=gtk3.22,qt6,sdl2 --enable-fcmp=gtk3,qt
+ --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
 then
   echo "Freeciv configure failed!" >&2
   exit 1
