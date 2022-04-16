@@ -41,8 +41,8 @@ eval "$("${MAINDIR}/Resources/bin/brew" shellenv)"
 # - shared-mime-info : current version available from homebrew does not build with recent meson
 # - meson : version available from homebrew fails building latest gtk+3
 HEAD_PACKAGES="\
- shared-mime-info \
  meson \
+ shared-mime-info \
 "
 
 PACKAGES="\
