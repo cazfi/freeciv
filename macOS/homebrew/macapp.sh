@@ -1,5 +1,12 @@
 #!/bin/bash
 
+cd "$(dirname $0)/../../"
+
+if ! test -x "./fc_version" ; then
+  echo "No executable ./fcversion at $(pwd)" >&2
+  exit 1
+fi
+
 FCVER="$(./fc_version)"
 
 MAINDIR="/Applications/freeciv-${FCVER}.app"
@@ -42,7 +49,6 @@ PACKAGES="\
  gettext \
  glib \
  gtk+3 \
- gtk4 \
  icu4c \
  pango \
  sdl2_gfx \
@@ -52,10 +58,18 @@ PACKAGES="\
  qt@6 \
 "
 
+if ! brew fetch $PACKAGES ; then
+  echo "Homebrew fetching packages failed." >&2
+  exit 1
+fi
+
 if ! brew install $PACKAGES ; then
   echo "Homebrew packages installation failed." >&2
   exit 1
 fi
+
+# Standard naming of the tools (gmake -> make etc)
+export PATH="${MAINDIR}/Resources/opt/libtool/libexec/gnubin:$PATH"
 
 if ! ./configure --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
  PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt5/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" \
@@ -67,7 +81,12 @@ then
   exit 1
 fi
 
+if ! make -j$(sysctl -n hw.logicalcpu) ; then
+  echo"Freeciv make failed!" >&2
+  exit 1
+fi
+
 if ! make install ; then
-  echo "Freeciv make (install) failed!" >&2
+  echo "Freeciv make install failed!" >&2
   exit 1
 fi
