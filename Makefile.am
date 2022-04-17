@@ -28,6 +28,7 @@ docs =			\
 
 EXTRA_DIST =	autogen.sh 			\
 		configure.ac			\
+		macOS/homebrew/hbinstall.sh	\
 		m4/ax_cxx_compile_stdcxx.m4	\
 		m4/c99.m4			\
 		m4/c11.m4			\
