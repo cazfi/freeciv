@@ -5,7 +5,7 @@ AC_DEFUN([FC_QT6_DARWIN],
   AC_ARG_WITH([qt6_framework_bin],
     AS_HELP_STRING([--with-qt6-framework-bin], [path to binares of Qt6 framework (MacOS X, autodetected if wasn't specified)]))
 
-  AC_CHECK_PROG([QTPATHS], [qtpaths], [qtpaths], [no])
+  AC_PATH_PROG([QTPATHS], [qtpaths], [no])
 
   if test "x$QTPATHS" != "xno" ; then
 
@@ -45,7 +45,7 @@ AC_DEFUN([FC_QT6_DARWIN],
 dnl Test if Qt6 headers are found from given path
 AC_DEFUN([FC_QT6_DARWIN_COMPILETEST],
 [
-  CPPFADD=" -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I$1/lib/QtWidgets.framework/Versions/Current/Headers -I$1/lib/QtGui.framework/Versions/Current/Headers -I$1/lib/QtCore.framework/Versions/Current/Headers -I. -I$1/mkspecs/macx-clang -F$1/lib "
+  CPPFADD=" -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I$1/lib/QtWidgets.framework/Versions/A/Headers -I$1/lib/QtGui.framework/Versions/A/Headers -I$1/lib/QtCore.framework/Versions/A/Headers -I. -I$1/mkspecs/macx-clang -F$1/lib "
 
   CPPFLAGS_SAVE="$CPPFLAGS"
   CPPFLAGS="${CPPFLAGS}${CPPFADD}"
