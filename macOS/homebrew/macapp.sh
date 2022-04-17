@@ -53,6 +53,7 @@ cd build || exit 1
 export PATH="${MAINDIR}/Contents/Resources/bin:$(brew --prefix qt@6)/bin:$PATH"
 export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
 export LIBS="-L$(brew --prefix qt@6)/lib -L${MAINDIR}/Contents/Resources/lib"
+export CPPFLAGS="-I$(brew --prefix qt@6)/include $CPPFLAGS"
 
 if ! test -x "${SRCROOT}/configure" ; then
   # Assume this to be a git checkout - generate required bootstrap files
@@ -64,8 +65,6 @@ fi
 
 # TODO: Find out where the command really is, and get rid of this search
 export MOCCMD="$(find "${MAINDIR}/Resources" -name "moc" | head -n 1)"
-
-echo "MOCCMD: \"$MOCCMD\""
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
      --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
