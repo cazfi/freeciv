@@ -67,7 +67,7 @@ fi
 export MOCCMD="$(find "${MAINDIR}/Resources" -name "moc" | head -n 1)"
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
-     --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
+     --enable-client=gtk3.22,sdl2 --enable-fcmp=gtk3
 then
   echo "Freeciv configure failed!" >&2
   exit 1
