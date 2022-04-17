@@ -50,9 +50,9 @@ fi
 
 cd build || exit 1
 
-export PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/icu4c/bin/:${MAINDIR}/Contents/Resources/opt/qt6/bin/:$PATH"
-export PKG_CONFIG_PATH="${MAINDIR}/Contents/Resources/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
-export LIBS="-L${MAINDIR}/Contents/Resources/opt/qt6/lib -L${MAINDIR}/Contents/Resources/lib"
+export PATH="${MAINDIR}/Contents/Resources/bin:$(brew --prefix qt@6)/bin:$PATH"
+export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export LIBS="-L$(brew --prefix qt@6)/lib -L${MAINDIR}/Contents/Resources/lib"
 
 if ! test -x "${SRCROOT}/configure" ; then
   # Assume this to be a git checkout - generate required bootstrap files
@@ -69,7 +69,6 @@ if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/
      --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
 then
   echo "Freeciv configure failed!" >&2
-  cat config.log
   exit 1
 fi
 
