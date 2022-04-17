@@ -65,11 +65,13 @@ fi
 
 # TODO: Find out where the command really is, and get rid of this search
 export MOCCMD="$(find "${MAINDIR}/Resources" -name "moc" | head -n 1)"
+echo "moc found as \"${MOCCMD}\""
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
-     --enable-client=gtk3.22,sdl2 --enable-fcmp=gtk3
+     --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
 then
   echo "Freeciv configure failed!" >&2
+  cat config.log
   exit 1
 fi
 
