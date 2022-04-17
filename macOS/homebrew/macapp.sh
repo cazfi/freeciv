@@ -63,7 +63,9 @@ if ! test -x "${SRCROOT}/configure" ; then
 fi
 
 # TODO: Find out where the command really is, and get rid of this search
-export MOCCMD="$(find "${MAINDIR}/Resources/Cellar/qt" -name "moc" | head -n 1)"
+export MOCCMD="$(find "${MAINDIR}/Resources" -name "moc" | head -n 1)"
+
+echo "MOCCMD: \"$MOCCMD\""
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
      --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
