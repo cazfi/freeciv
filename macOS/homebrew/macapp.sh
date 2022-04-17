@@ -48,7 +48,7 @@ fi
 
 cd build || exit 1
 
-export PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/qt6/bin/:$PATH"
+export PATH="${MAINDIR}/Contents/Resources/bin:${MAINDIR}/Contents/Resources/opt/icu4c/bin/:${MAINDIR}/Contents/Resources/opt/qt6/bin/:$PATH"
 export PKG_CONFIG_PATH="${MAINDIR}/Contents/Resources/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
 export LIBS="-L${MAINDIR}/Contents/Resources/opt/qt6/lib -L${MAINDIR}/Contents/Resources/lib"
 
