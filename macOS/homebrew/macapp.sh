@@ -6,8 +6,10 @@
 # Parts of this can be tested on linux too.
 if test "$(uname)" = "Linux" ; then
   APPROOT="$HOME/homebrew"
+  CORES="$(nproc)"
 else
   APPROOT="/Applications"
+  CORES="$(sysctl -n hw.logicalcpu)"
 fi
 
 cd "$(dirname "$0")" || exit 1
@@ -67,10 +69,11 @@ if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/
      --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
 then
   echo "Freeciv configure failed!" >&2
+  cat config.log
   exit 1
 fi
 
-if ! make "-j$(sysctl -n hw.logicalcpu)" ; then
+if ! make "-j${CORES}" ; then
   echo "Freeciv make failed!" >&2
   exit 1
 fi
