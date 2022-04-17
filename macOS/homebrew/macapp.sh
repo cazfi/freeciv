@@ -66,6 +66,7 @@ fi
 # TODO: Find out where the command really is, and get rid of this search
 export MOCCMD="$(find "${MAINDIR}/Resources" -name "moc" | head -n 1)"
 echo "moc found as \"${MOCCMD}\""
+echo "QApplication search: $(find "${MAINDIR}/Resources" -name "QApplication" | head -n 1)"
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
      --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
