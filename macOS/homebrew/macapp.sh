@@ -70,7 +70,7 @@ echo "QApplication search: $(find "${MAINDIR}/Resources" -name "QApplication" | 
 echo "QApplication search under \"$(brew --prefix qt@6)\": $(find "$(brew --prefix qt@6)" -name "QApplication" | head -n 1)"
 # This sed assumes that the only space is between the name and the version number.
 # Basing this to a detection of numbers would break for a name like "qt6"
-QT6VERDIR="$(brew ls --versions qt@6)| sed 's/.* //'"
+QT6VERDIR="$(brew ls --versions qt@6 | sed 's/.* //')"
 echo "Qt6 ver: \"${QT6VERDIR}\""
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
