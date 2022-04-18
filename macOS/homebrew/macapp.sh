@@ -68,10 +68,13 @@ export MOCCMD="$(find "${MAINDIR}/Resources" -name "moc" | head -n 1)"
 echo "moc found as \"${MOCCMD}\""
 echo "QApplication search: $(find "${MAINDIR}/Resources" -name "QApplication" | head -n 1)"
 echo "QApplication search under \"$(brew --prefix qt@6)\": $(find "$(brew --prefix qt@6)" -name "QApplication" | head -n 1)"
-echo "Qt6 ver: \"$(brew ls --versions qt@6)\""
+# This sed assumes that the only space is between the name and the version number.
+# Basing this to a detection of numbers would break for a name like "qt6"
+QT6VERDIR="$(brew ls --versions qt@6)| sed 's/.* //'"
+echo "Qt6 ver: \"${QT6VERDIR}\""
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
-     --with-qt6-framework="${MAINDIR}/Resources/Cellar/qt/$(brew ls --versions qt@6)" \
+     --with-qt6-framework="${MAINDIR}/Resources/Cellar/qt/${QT6VERDIR}" \
      --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
 then
   echo "Freeciv configure failed!" >&2
