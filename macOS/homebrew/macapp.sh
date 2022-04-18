@@ -68,8 +68,10 @@ export MOCCMD="$(find "${MAINDIR}/Resources" -name "moc" | head -n 1)"
 echo "moc found as \"${MOCCMD}\""
 echo "QApplication search: $(find "${MAINDIR}/Resources" -name "QApplication" | head -n 1)"
 echo "QApplication search under \"$(brew --prefix qt@6)\": $(find "$(brew --prefix qt@6)" -name "QApplication" | head -n 1)"
+echo "Qt6 ver: \"$(brew ls --versions qt@6)\""
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
+     --with-qt6-framework="${MAINDIR}/Resources/Cellar/qt/$(brew ls --versions qt@6)" \
      --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
 then
   echo "Freeciv configure failed!" >&2
