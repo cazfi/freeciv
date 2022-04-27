@@ -64,6 +64,7 @@ PACKAGES="\
  sdl2_mixer \
  sdl2_ttf \
  qt@6 \
+ adwaita-icon-theme \
 "
 
 if test "$HEAD_PACKAGES" != "" ; then
