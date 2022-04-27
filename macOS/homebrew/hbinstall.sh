@@ -18,24 +18,24 @@ if ! mkdir -p "${MAINDIR}/Contents" ; then
   exit 1
 fi
 
-if ! mkdir -p "${MAINDIR}/Resources" ; then
-  echo "Failed to create \"${MAINDIR}/Resources\"" >&2
+if ! mkdir -p "${MAINDIR}/Contents/Resources" ; then
+  echo "Failed to create \"${MAINDIR}/Contents/Resources\"" >&2
   exit 1
 fi
 
-if ! mkdir -p "${MAINDIR}/MacOS" ; then
-  echo "Failed to create \"${MAINDIR}/MacOS\"" >&2
+if ! mkdir -p "${MAINDIR}/Contents/MacOS" ; then
+  echo "Failed to create \"${MAINDIR}/Contents/MacOS\"" >&2
   exit 1
 fi
 
 if ! curl -L "https://github.com/Homebrew/brew/tarball/${HBVER}" |
-     tar xz --strip 1 -C "${MAINDIR}/Resources"
+     tar xz --strip 1 -C "${MAINDIR}/Contents/Resources"
 then
   echo "Homebrew install failed" >&2
   exit 1
 fi
 
-eval "$("${MAINDIR}/Resources/bin/brew" shellenv)"
+eval "$("${MAINDIR}/Contents/Resources/bin/brew" shellenv)"
 
 # Packages that we temporarily take from HEAD
 # - shared-mime-info : current version available from homebrew does not build with recent meson

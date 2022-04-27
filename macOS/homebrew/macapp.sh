@@ -38,10 +38,10 @@ else
   echo "\${MAINDIR}\" exist. Skipping homebrew install"
 fi
 
-eval "$("${MAINDIR}/Resources/bin/brew" shellenv)"
+eval "$("${MAINDIR}/Contents/Resources/bin/brew" shellenv)"
 
 # Standard naming of the tools (gmake -> make etc)
-export PATH="${MAINDIR}/Resources/opt/libtool/libexec/gnubin:$PATH"
+export PATH="${MAINDIR}/Contents/Resources/opt/libtool/libexec/gnubin:$PATH"
 
 if ! mkdir -p build ; then
   echo "Failed to create the build directory" >&2
@@ -64,9 +64,9 @@ if ! test -x "${SRCROOT}/configure" ; then
 fi
 
 # TODO: Find out where the command really is, and get rid of this search
-export MOCCMD="$(find "${MAINDIR}/Resources" -name "moc" | head -n 1)"
+export MOCCMD="$(find "${MAINDIR}/Contents/Resources" -name "moc" | head -n 1)"
 echo "moc found as \"${MOCCMD}\""
-echo "QApplication search: $(find "${MAINDIR}/Resources" -name "QApplication" | head -n 1)"
+echo "QApplication search: $(find "${MAINDIR}/Contents/Resources" -name "QApplication" | head -n 1)"
 echo "QApplication search under \"$(brew --prefix qt@6)\": $(find "$(brew --prefix qt@6)" -name "QApplication" | head -n 1)"
 # This sed assumes that the only space is between the name and the version number.
 # Basing this to a detection of numbers would break for a name like "qt6"
@@ -74,7 +74,7 @@ QT6VERDIR="$(brew ls --versions qt@6 | sed 's/.* //')"
 echo "Qt6 ver: \"${QT6VERDIR}\""
 
 if ! "${SRCROOT}/configure" --prefix="${MAINDIR}/Contents" --bindir="${MAINDIR}/MacOS" \
-     --with-qt6-framework="${MAINDIR}/Resources/Cellar/qt/${QT6VERDIR}" \
+     --with-qt6-framework="${MAINDIR}/Contents/Resources/Cellar/qt/${QT6VERDIR}" \
      --enable-client=gtk3.22,qt,sdl2 --enable-fcmp=gtk3,qt
 then
   echo "Freeciv configure failed!" >&2
