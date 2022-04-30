@@ -15,7 +15,7 @@ cd "$(dirname "$0")" || exit 1
 SRCROOT="$(cd ../.. && pwd)"
 
 if ! test -x "${SRCROOT}/fc_version" ; then
-  echo "No executable ${SRCROOT}/fcversion" >&2
+  echo "No executable ${SRCROOT}/fc_version" >&2
   exit 1
 fi
 
