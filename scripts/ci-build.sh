@@ -39,7 +39,7 @@ ninja install
 "os_x")
 # gcc is an alias for clang on OS X
 
-echo "Nothing to do"
+./macOS/homebrew/macapp.sh
 ;;
 
 "clang_debug")
