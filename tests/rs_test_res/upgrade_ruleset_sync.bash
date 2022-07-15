@@ -11,7 +11,7 @@ set -e
 cd $(dirname $0)
 
 # list of rulesets to copy
-rulesets=`cat ruleset_list.txt`
+rulesets=`cat ruleset_list-S3_1.txt`
 
 if test "x$1" = "x" ; then
   REVISION=$DEFAULT_REVISION
