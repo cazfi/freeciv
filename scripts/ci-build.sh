@@ -119,6 +119,10 @@ cd ${HOME}/freeciv/mac-meson/bin/
 echo "Freeciv server autogame successful!"
 ;;
 
+"mac-bundle")
+  ./platforms/macos/homebrew-appbundle.sh
+;;
+
 "clang_debug")
 # Configure and build Freeciv
 mkdir build
