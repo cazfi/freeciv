@@ -177,6 +177,12 @@ echo "Freeciv build successful!"
 emsdk)
   git clone https://github.com/emscripten-core/emsdk.git
 
+  (
+    cd emsdk
+    ./emsdk install latest
+    ./emsdk activate latest
+  )
+
   mkdir build
   cd build
   ../platforms/emscripten/emsbuild.sh ../emsdk
