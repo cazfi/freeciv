@@ -268,6 +268,11 @@ jobs:
     steps:
       - name: check out Freeciv
         uses: actions/checkout@v3.5.2
+      - name: install dependencies
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get -y install \
+            meson
       - name: build
         shell: bash
         run: ./scripts/ci-build.sh emsdk
