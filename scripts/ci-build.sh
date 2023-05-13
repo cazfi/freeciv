@@ -176,7 +176,7 @@ emsdk)
   (
     cd emsdk
     ./emsdk install latest
-    ./emsdk activate latest
+    ./emsdk install binaryen-main-64bit
   )
 
   mkdir build
