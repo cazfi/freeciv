@@ -183,9 +183,11 @@ emsdk)
     ./emsdk activate latest
   )
 
+  ABS_EMSDK="$(pwd)/emsdk"
+
   mkdir build
   cd build
-  ../platforms/emscripten/emsbuild.sh ../emsdk
+  ../platforms/emscripten/emsbuild.sh "${ABS_EMSDK}"
 ;;
 
 *)
