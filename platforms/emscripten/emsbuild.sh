@@ -14,7 +14,8 @@ fi
 
 EMSDK_ROOT="$1"
 BUILD_ROOT="$(pwd)"
-PLATFORM_ROOT="$(cd $(dirname "$0") && pwd)"
+PLATFORM_RELATIVE="$(dirname $0)"
+PLATFORM_ROOT="$(cd "${PLATFORM_RELATIVE}" && pwd)"
 
 if test "${PLATFORM_ROOT}" = "${BUILD_ROOT}" ; then
   echo "Run $0 from a separate build directory." >&2
@@ -46,7 +47,7 @@ if ! CC=emcc CXX=em++ AR=emar meson setup \
      -Druledit=false \
      -Dclients=sdl2,stub \
      -Dfcmp=[] \
-     "${PLATFORM_ROOT}/../../"
+     "${PLATFORM_RELATIVE}/../../"
 then
   echo "Setup with meson failed!" >&2
   exit 1
