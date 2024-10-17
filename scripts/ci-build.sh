@@ -82,6 +82,11 @@ export CPPFLAGS="-I${GETTEXT_PREFIX}/include -I${READLINE_PREFIX}/include -I${SD
 export LDFLAGS="-L${GETTEXT_PREFIX}/lib -L${ICU4C_PREFIX}/lib -L${READLINE_PREFIX}/lib -L${SDL2_PREFIX}/lib -L${SDL2_MIXER_PREFIX}/lib -L${SDL2_TTF_PREFIX}/lib -L${SDL2_IMAGE_PREFIX}/lib"
 export PKG_CONFIG_PATH="${ICU4C_PREFIX}/lib/pkgconfig"
 
+echo "ICU4C_PREFIX: \"${ICU4C_PREFIX}\""
+echo "Content:"
+find "${ICU4C_PREFIX}"
+echo "* End of content *"
+
 mkdir build
 cd build
 meson setup .. \
