@@ -18,6 +18,7 @@
 
 import re
 import argparse
+import platform
 import sys
 from pathlib import Path
 from contextlib import contextmanager, ExitStack
@@ -25,6 +26,7 @@ from functools import partial
 from itertools import chain, combinations, takewhile, zip_longest
 from enum import Enum
 from abc import ABC, abstractmethod
+from os import path
 
 try:
     from functools import cache
@@ -43,8 +45,15 @@ def file_path(s: "str | Path") -> Path:
     """Parse the given path and check basic validity."""
     path = Path(s)
 
-    if path.is_reserved() or not path.name:
+    if not path.name:
         raise ValueError(f"not a valid file path: {s!r}")
+    if platform.system() == 'Windows':
+        if sys.version_info.major == 3 and sys.version_info.minor < 13:
+            if path.is_reserved():
+                raise ValueError(f"not a valid file path: {s!r}")
+        else:
+            if os.path.isreserved(path):
+                raise ValueError(f"not a valid file path: {s!r}")
     if path.exists() and not path.is_file():
         raise ValueError(f"not a file: {s!r}")
 
