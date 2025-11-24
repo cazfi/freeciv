@@ -1075,6 +1075,8 @@ else
   MWINDOWS_FLAG=""
 fi
 
+AC_CHECK_HEADERS([arm_acle.h])
+
 dnl Check and choose clients
 if test "x$client" != "xno"; then
 
