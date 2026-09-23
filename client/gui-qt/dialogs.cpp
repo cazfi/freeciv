@@ -81,6 +81,7 @@ extern void popdown_city_report();
 extern void popdown_endgame_report();
 
 static void spy_request_strike_bld_list(QVariant data1, QVariant data2);
+static void spy_request_strike_production(QVariant data1, QVariant data2);
 static void diplomat_incite(QVariant data1, QVariant data2);
 static void diplomat_incite_escape(QVariant data1, QVariant data2);
 static void spy_request_sabotage_list(QVariant data1, QVariant data2);
@@ -274,6 +275,7 @@ static const QHash<action_id, pfcn_void> af_map_init(void)
   action_function[ACTION_CONQUER_CITY3] = conquer_city3;
   action_function[ACTION_CONQUER_CITY4] = conquer_city4;
   action_function[ACTION_STRIKE_BUILDING] = spy_request_strike_bld_list;
+  action_function[ACTION_STRIKE_PRODUCTION] = spy_request_strike_production;
   action_function[ACTION_NUKE_CITY] = nuke_city;
 
   // Unit acting against a unit target.
@@ -3631,7 +3633,22 @@ static void spy_request_strike_bld_list(QVariant data1, QVariant data2)
 }
 
 /***********************************************************************//**
-  Action  request sabotage list for choice dialog
+  Action request "Surgical Strike Production" for choice dialog
+***************************************************************************/
+static void spy_request_strike_production(QVariant data1, QVariant data2)
+{
+  int actor_id = data1.toInt();
+  int target_id = data2.toInt();
+
+  if (game_unit_by_number(actor_id) != nullptr
+      && game_city_by_number(target_id) != nullptr) {
+    request_do_action(ACTION_STRIKE_PRODUCTION,
+                      actor_id, target_id, 0, "");
+  }
+}
+
+/***********************************************************************//**
+  Action request sabotage list for choice dialog
 ***************************************************************************/
 static void spy_request_sabotage_list(QVariant data1, QVariant data2)
 {
