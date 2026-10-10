@@ -66,6 +66,7 @@ meson setup .. \
   -Dprefix=${HOME}/freeciv/meson \
   -Ddefault_library=static \
   -Ddebug=true \
+  -Dwerror=true \
   -Dclients='gtk3.22','qt','sdl2','gtk4','stub' \
   -Dfcmp='gtk3','qt','cli','gtk4' \
   -Dqtver=qt6 \
@@ -117,6 +118,7 @@ cd build
 meson setup .. \
   -Dqtver=qt6x \
   -Ddebug=true \
+  -Dwerror=true \
   -Daudio=sdl3 \
   -Dtools=ruledit,manual,ruleup \
   -Dclients=gtk3.22,sdl3,gtk4,qt,stub,gtk4x \
@@ -146,6 +148,7 @@ CC="clang" \
 CXX="clang++" \
 meson setup .. \
  -Ddebug=true \
+ -Dwerror=true \
  -Dqtver=qt6 \
  -Dclients=gtk3.22,gtk4,qt,sdl2,stub \
  -Dfcmp=gtk3,gtk4,qt,cli \
