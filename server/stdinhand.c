@@ -6349,7 +6349,9 @@ static bool kick_command(struct connection *caller, char *name, bool check)
   }
 
   if (caller != nullptr && ALLOW_ADMIN > conn_get_access(caller)) {
-    const int MIN_UNIQUE_CONNS = 3;
+
+#define MIN_UNIQUE_CONNS 3
+
     const char *unique_ipaddr[MIN_UNIQUE_CONNS];
     int i, num_unique_connections = 0;
 
@@ -6382,6 +6384,8 @@ static bool kick_command(struct connection *caller, char *name, bool check)
       return FALSE;
     }
   }
+
+#undef MIN_UNIQUE_CONNS
 
   if (check) {
     return TRUE;
